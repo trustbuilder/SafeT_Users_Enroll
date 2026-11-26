@@ -69,18 +69,12 @@ $accounts = .\SafeT_Users_Enroll.ps1 -tenantid 'my-tenant' -users -object
 
 | Parameter | Alias | Description |
 | --- | --- | --- |
-| `-tenantid <string>` | See note below | Tenant identifier. Required unless displaying help. Can also be supplied as the first positional argument. |
+| `-tenantid <string>` | `-t` | Tenant identifier. Required unless displaying help. Can also be supplied as the first positional argument. |
 | `-users` | `-u` | Output the tenant user inventory. |
 | `-firstenroll` | `-f` | Generate enrollment links for accounts with an empty or missing enrollment status. |
 | `-reenroll` | `-r` | Regenerate expired links for accounts with status `IN_PROGRESS`. |
 | `-object` | `-o` | Return PowerShell objects instead of formatted tables for the selected output. |
 | `-help` | `-h`, `-?` | Display detailed help and exit. |
-
-Use `-tenantid` explicitly in version 1.0. The current declaration, `[Alias("t,tenant")]`, does not define `-t` and `-tenant` as separate aliases. To enable both, replace it with:
-
-```powershell
-[Alias('t', 'tenant')]
-```
 
 ## Usage
 
@@ -98,16 +92,16 @@ Display a formatted table:
 .\SafeT_Users_Enroll.ps1 -tenantid 'my-tenant' -users
 ```
 
-Return objects for further processing:
+Return objects for further processing, 'my-tenant as first positional argument ':
 
 ```powershell
-$accounts = .\SafeT_Users_Enroll.ps1 -tenantid 'my-tenant' -users -object
+$accounts = .\SafeT_Users_Enroll.ps1 'my-tenant' -users -object
 ```
 
 When no inventory or enrollment switch is specified, the default output is the user inventory as PowerShell objects:
 
 ```powershell
-$accounts = .\SafeT_Users_Enroll.ps1 -tenantid 'my-tenant'
+$accounts = .\SafeT_Users_Enroll.ps1 -t 'my-tenant'
 ```
 
 ### Review Expired Enrollment Links
